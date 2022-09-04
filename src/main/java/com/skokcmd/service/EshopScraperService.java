@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 
-public class EshopScraperService implements IEshopScraperService {
+public class EshopScraperService implements IScraperService<Product> {
 
     private String url;
     private Document document;
@@ -107,7 +107,7 @@ public class EshopScraperService implements IEshopScraperService {
      * @return list of products
      */
     @Override
-    public List<Product> getItemsByClass(String productClassName) {
+    public List<Product> getItemsByCssClassName(String productClassName) {
         Elements items = document.getElementsByClass(productClassName);
         Map<String, String> userArgs = getUserInputForProduct();
 
@@ -164,18 +164,15 @@ public class EshopScraperService implements IEshopScraperService {
         return getItemTextFromByClassName(item, userArgs.get(classNameKey));
     }
 
-    @Override
-    public String getItemTextByUniqueTag(Element item, String tag) {
+    private String getItemTextByUniqueTag(Element item, String tag) {
         return item.getElementsByTag(tag).first().text().trim();
     }
 
-    @Override
-    public String getItemTextFromByClassName(Element item, String className) {
+    private String getItemTextFromByClassName(Element item, String className) {
         return item.getElementsByClass(className).first().text();
     }
 
-    @Override
-    public String getItemImgSrc(Element item, String imgSrcAtr) {
+    private String getItemImgSrc(Element item, String imgSrcAtr) {
         return item.getElementsByTag(this.IMG_TAG).first().attr(imgSrcAtr).trim();
     }
 }

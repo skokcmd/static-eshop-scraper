@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface IScraperService<T> {
 
-    List<T> getItemsByClass(String className) throws IOException;
+    List<T> getItemsByCssClassName(String className) throws IOException;
 
 }

@@ -1,7 +1,7 @@
 package com.skokcmd;
 
 import com.skokcmd.service.EshopScraperService;
-import com.skokcmd.service.IEshopScraperService;
+import com.skokcmd.service.IScraperService;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,14 +16,14 @@ public class ProfibaScraper {
 //      "https://www.parkove-lavicky.cz/nabidka-mestskeho-mobiliare/?order=0&ppt=500";
 
         Scanner scanner = new Scanner(System.in);
-        IEshopScraperService eshopScraperService = getEshopScraperBasedOnUserInput(scanner);
+        IScraperService<Product> eshopScraperService = getEshopScraperBasedOnUserInput(scanner);
 
         List<Product> products = getProductsBasedOnProductClassUserInput(scanner, eshopScraperService);
 
         products.forEach(product -> System.out.println(product.toString()));
     }
 
-    public static IEshopScraperService getEshopScraperBasedOnUserInput(Scanner scanner) throws IOException {
+    public static IScraperService<Product> getEshopScraperBasedOnUserInput(Scanner scanner) throws IOException {
         System.out.print("Enter url for scraping: ");
         String url = scanner.nextLine();
 
@@ -31,12 +31,12 @@ public class ProfibaScraper {
     }
 
     public static List<Product> getProductsBasedOnProductClassUserInput(
-            Scanner scanner, IEshopScraperService eshopScraperService) throws IOException {
+            Scanner scanner, IScraperService<Product> eshopScraperService) throws IOException {
 
         System.out.print("Enter product css class: ");
         String productClass = scanner.nextLine();
 
-        return eshopScraperService.getItemsByClass(productClass);
+        return eshopScraperService.getItemsByCssClassName(productClass);
     }
 
 }
