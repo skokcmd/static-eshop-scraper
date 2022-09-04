@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProfibaScraper {
+public class StaticEshopScraper {
     public static void main(String[] args) throws IOException {
         run();
     }
